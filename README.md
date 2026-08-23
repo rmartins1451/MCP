@@ -1,10 +1,19 @@
 # losbeto-mcp
 
-Losbeto x402 crypto intelligence as native tools in Claude Desktop, Claude Code, or Cursor.
+Losbeto x402 market intelligence as native tools in Claude Desktop, Claude Code, or Cursor.
+Brazil central-bank macro, multi-oracle price consensus, launch risk, forex, commodities and crypto.
 No signup. No API key. Paid tools settle automatically in USDC on Base via x402.
 
-## Install (Claude Desktop / Cursor)
-Add to your MCP config:
+## Recommended: remote server (no install)
+```json
+{
+  "mcpServers": {
+    "losbeto": { "url": "https://api.losbeto.xyz/mcp" }
+  }
+}
+```
+
+## Install locally (Claude Desktop / Cursor)
 ```json
 {
   "mcpServers": {
@@ -19,9 +28,8 @@ Add to your MCP config:
 `LOSBETO_PRIVATE_KEY` = an EVM private key holding a little USDC on Base (optional — free tools work without it).
 
 ## Tools
-- `launch_risk_preview` (FREE) — fresh Solana launches + preview of the brief
-- `launch_risk_brief` (~$0.35) — full risk brief: on-chain checks, liquidity, AI verdict
-- `fear_greed` ($0.01) · `sol_price` ($0.01)
-- `receipts` (FREE) — audit our on-chain sales, honestly labeled
+FREE: `try_samples` (6 live samples in 1 call) · `welcome_free_call` (one real-time call, no wallet) · `launch_risk_preview` · `receipts` (audit our on-chain sales, honestly labeled)
 
-Transparency: https://losbeto-production-dd7c.up.railway.app/receipts
+PAID via x402: `launch_risk_brief` (~$0.10) · `br_macro` ($0.05, BCB data) · `oracle_consensus` ($0.03) · `fear_greed` ($0.01) · `sol_price` ($0.003)
+
+Transparency: https://api.losbeto.xyz/receipts · Catalog: https://api.losbeto.xyz/get-pricing

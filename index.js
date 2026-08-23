@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 /**
  * losbeto-mcp — Losbeto x402 tools inside Claude/Cursor.
+ * v1.1.0: aponta para api.losbeto.xyz (dominio oficial), catalogo atualizado,
+ * ferramentas gratis ampliadas (amostras reais sem chave).
  * Config: env LOSBETO_PRIVATE_KEY (EVM key with USDC on Base) enables paid tools.
  * Free tools work without any key.
  */
@@ -8,7 +10,7 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 
-const BASE_URL = process.env.LOSBETO_URL || "https://losbeto-production-dd7c.up.railway.app";
+const BASE_URL = process.env.LOSBETO_URL || "https://api.losbeto.xyz";
 const PK = process.env.LOSBETO_PRIVATE_KEY || "";
 
 let payFetch = fetch; // fallback: free endpoints only
@@ -25,24 +27,36 @@ if (PK) {
 }
 
 const TOOLS = [
+  { name: "try_samples", paid: false, path: "/try",
+    description: "FREE: six live endpoint samples in one call — the fastest way to see what Losbeto data looks like.",
+    inputSchema: { type: "object", properties: {} } },
+  { name: "welcome_free_call", paid: false, path: "/welcome",
+    description: "FREE: get a welcome token good for ONE real-time call on any endpoint, no wallet needed.",
+    inputSchema: { type: "object", properties: {} } },
   { name: "launch_risk_preview", paid: false, path: "/launch-risk-preview",
     description: "FREE: latest Solana token launches + what the full risk brief includes.",
     inputSchema: { type: "object", properties: {} } },
+  { name: "receipts", paid: false, path: "/receipts",
+    description: "FREE: audit Losbeto's on-chain sales receipts (radical transparency, operator tests labelled).",
+    inputSchema: { type: "object", properties: {} } },
   { name: "launch_risk_brief", paid: true, path: "/launch-risk",
-    description: "PAID (~$0.35 USDC via x402): full launch risk brief — on-chain checks (mint authority, holder concentration), DEX liquidity/socials, risk score 0-100, AI verdict (AVOID/WATCH/SMALL-SIZE-ONLY). Optional token arg = Solana mint; omit to analyze the freshest launch.",
+    description: "PAID (~$0.10 USDC via x402): full launch risk brief — on-chain checks (mint authority, holder concentration), DEX liquidity/socials, risk score 0-100, AI verdict (AVOID/WATCH/SMALL-SIZE-ONLY). Optional token arg = Solana mint; omit to analyze the freshest launch.",
     inputSchema: { type: "object", properties: { token: { type: "string", description: "Solana mint address (optional)" } } } },
   { name: "fear_greed", paid: true, path: "/fear-greed",
     description: "PAID ($0.01): live crypto Fear & Greed index with interpretation.",
     inputSchema: { type: "object", properties: {} } },
   { name: "sol_price", paid: true, path: "/pyth-price",
-    description: "PAID ($0.01): SOL/USD from Pyth Network oracle.",
+    description: "PAID ($0.003): SOL/USD from Pyth Network oracle.",
     inputSchema: { type: "object", properties: {} } },
-  { name: "receipts", paid: false, path: "/receipts",
-    description: "FREE: audit Losbeto's on-chain sales receipts (radical transparency).",
+  { name: "br_macro", paid: true, path: "/br-macro",
+    description: "PAID ($0.05): Brazil central-bank macro in one call — Selic, CDI, IPCA 12m, IGP-M, official PTAX and EUR/BRL, plus the real rate (Fisher relation).",
     inputSchema: { type: "object", properties: {} } },
+  { name: "oracle_consensus", paid: true, path: "/oracle-consensus",
+    description: "PAID ($0.03): price consensus across multiple oracles/exchanges — median, spread in bps, outlier detection and execution verdict. Optional symbol arg (default SOL).",
+    inputSchema: { type: "object", properties: { symbol: { type: "string", description: "Asset symbol, e.g. BTC, ETH, SOL (optional)" } } } },
 ];
 
-const server = new Server({ name: "losbeto", version: "1.0.0" }, { capabilities: { tools: {} } });
+const server = new Server({ name: "losbeto", version: "1.1.0" }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: TOOLS.map(({ name, description, inputSchema }) => ({ name, description, inputSchema })),
@@ -53,7 +67,9 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
   if (!tool) return { content: [{ type: "text", text: `Unknown tool: ${req.params.name}` }], isError: true };
   if (tool.paid && payFetch === fetch)
     return { content: [{ type: "text", text: "This tool is paid via x402. Set LOSBETO_PRIVATE_KEY (EVM key holding USDC on Base) to enable automatic micropayments." }], isError: true };
-  const qs = req.params.arguments?.token ? `?token=${encodeURIComponent(req.params.arguments.token)}` : "";
+  const args = req.params.arguments || {};
+  const qs = args.token ? `?token=${encodeURIComponent(args.token)}`
+           : args.symbol ? `?symbol=${encodeURIComponent(args.symbol)}` : "";
   try {
     const r = await (tool.paid ? payFetch : fetch)(`${BASE_URL}${tool.path}${qs}`);
     const text = await r.text();
