@@ -1,4 +1,4 @@
-# losbeto-mcp
+# losbeto-mcp     <!-- mcp-name: io.github.rmartins1451/losbeto -->
 
 Losbeto x402 market intelligence as native tools in Claude Desktop, Claude Code, or Cursor.
 Brazil central-bank macro, multi-oracle price consensus, launch risk, forex, commodities and crypto.
