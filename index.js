@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * losbeto-mcp — Losbeto x402 tools inside Claude/Cursor.
- * v1.1.0: aponta para api.losbeto.xyz (dominio oficial), catalogo atualizado,
- * ferramentas gratis ampliadas (amostras reais sem chave).
+ * v1.1.2: version aligned across npm/registry; 60s request timeout (node can
+ * cold-start ~6s); sends "losbeto-mcp/1.1.2" User-Agent so operator can
+ * measure npm-driven traffic in server logs; no other behavior changes.
  * Config: env LOSBETO_PRIVATE_KEY (EVM key with USDC on Base) enables paid tools.
  * Free tools work without any key.
  */
@@ -10,6 +11,8 @@ import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 
+const VERSION = "1.1.2";
+const UA = `losbeto-mcp/${VERSION}`;
 const BASE_URL = process.env.LOSBETO_URL || "https://api.losbeto.xyz";
 const PK = process.env.LOSBETO_PRIVATE_KEY || "";
 
@@ -56,7 +59,7 @@ const TOOLS = [
     inputSchema: { type: "object", properties: { symbol: { type: "string", description: "Asset symbol, e.g. BTC, ETH, SOL (optional)" } } } },
 ];
 
-const server = new Server({ name: "losbeto", version: "1.1.0" }, { capabilities: { tools: {} } });
+const server = new Server({ name: "losbeto", version: VERSION }, { capabilities: { tools: {} } });
 
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: TOOLS.map(({ name, description, inputSchema }) => ({ name, description, inputSchema })),
@@ -71,14 +74,18 @@ server.setRequestHandler(CallToolRequestSchema, async (req) => {
   const qs = args.token ? `?token=${encodeURIComponent(args.token)}`
            : args.symbol ? `?symbol=${encodeURIComponent(args.symbol)}` : "";
   try {
-    const r = await (tool.paid ? payFetch : fetch)(`${BASE_URL}${tool.path}${qs}`);
+    const r = await (tool.paid ? payFetch : fetch)(`${BASE_URL}${tool.path}${qs}`, {
+      headers: { "User-Agent": UA, "Accept": "application/json" },
+      signal: AbortSignal.timeout(60000),
+    });
     const text = await r.text();
     return { content: [{ type: "text", text }], isError: !r.ok };
   } catch (e) {
-    return { content: [{ type: "text", text: `Request failed: ${e.message}` }], isError: true };
+    const msg = e.name === "TimeoutError" ? "request timed out after 60s (node may be cold-starting — try again)" : e.message;
+    return { content: [{ type: "text", text: `Request failed: ${msg}` }], isError: true };
   }
 });
 
 const transport = new StdioServerTransport();
 await server.connect(transport);
-console.error("[losbeto-mcp] ready");
+console.error(`[losbeto-mcp] ready (v${VERSION})`);

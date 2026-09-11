@@ -1,4 +1,4 @@
-# losbeto-mcp     <!-- mcp-name: io.github.rmartins1451/losbeto -->
+# losbeto-mcp
 
 Losbeto x402 market intelligence as native tools in Claude Desktop, Claude Code, or Cursor.
 Brazil central-bank macro, multi-oracle price consensus, launch risk, forex, commodities and crypto.
@@ -32,4 +32,4 @@ FREE: `try_samples` (6 live samples in 1 call) · `welcome_free_call` (one real-
 
 PAID via x402: `launch_risk_brief` (~$0.10) · `br_macro` ($0.05, BCB data) · `oracle_consensus` ($0.03) · `fear_greed` ($0.01) · `sol_price` ($0.003)
 
-Transparency: https://api.losbeto.xyz/receipts · Catalog: https://api.losbeto.xyz/get-pricing
+Transparency: https://api.losbeto.xyz/receipts · Live funnel: https://api.losbeto.xyz/funnel.json · Catalog: https://api.losbeto.xyz/get-pricing

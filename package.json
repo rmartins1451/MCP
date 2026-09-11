@@ -1,15 +1,31 @@
 {
   "name": "losbeto-mcp",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "mcpName": "io.github.rmartins1451/losbeto-mcp",
   "description": "MCP server for Losbeto x402 market intelligence: Brazil macro, oracles, launch risk. Pay-per-call USDC on Base, no API keys.",
-  "bin": { "losbeto-mcp": "./index.js" },
+  "bin": {
+    "losbeto-mcp": "index.js"
+  },
   "type": "module",
-  "keywords": ["mcp", "x402", "crypto", "brazil", "bcb", "solana", "base", "ai-agents"],
+  "keywords": [
+    "mcp",
+    "x402",
+    "crypto",
+    "brazil",
+    "bcb",
+    "solana",
+    "base",
+    "ai-agents"
+  ],
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
     "x402-fetch": "^0.3.0",
     "viem": "^2.21.0"
-  }
+  },
+  "files": [
+    "index.js",
+    "README.md",
+    "server.json"
+  ]
 }

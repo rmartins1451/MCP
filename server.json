@@ -7,18 +7,12 @@
     "url": "https://github.com/rmartins1451/MCP",
     "source": "github"
   },
-  "version": "1.1.0",
-  "remotes": [
-    {
-      "type": "streamable-http",
-      "url": "https://api.losbeto.xyz/mcp"
-    }
-  ],
+  "version": "1.1.2",
   "packages": [
     {
       "registryType": "npm",
       "identifier": "losbeto-mcp",
-      "version": "1.1.0",
+      "version": "1.1.2",
       "transport": {
         "type": "stdio"
       }
