@@ -1,21 +1,24 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.rmartins1451/losbeto-mcp",
-  "title": "Losbeto",
-  "description": "x402-paid market intelligence: forex, stocks, Brazil macro (BCB/B3) + crypto.",
+  "name": "io.github.rmartins1451/losbeto",
+  "title": "Losbeto — Market Data for AI Agents",
+  "description": "Cross-asset market data for AI agents: forex, equities, Brazil macro (BCB/B3), crypto.",
+  "version": "48.1.0",
   "repository": {
-    "url": "https://github.com/rmartins1451/MCP",
-    "source": "github"
+    "source": "github",
+    "url": "https://github.com/rmartins1451/losbeto"
   },
-  "version": "1.1.2",
-  "packages": [
+  "websiteUrl": "https://api.losbeto.xyz",
+  "icons": [
     {
-      "registryType": "npm",
-      "identifier": "losbeto-mcp",
-      "version": "1.1.2",
-      "transport": {
-        "type": "stdio"
-      }
+      "src": "https://api.losbeto.xyz/favicon.png",
+      "mimeType": "image/png"
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.losbeto.xyz/mcp"
     }
   ]
 }
