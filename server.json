@@ -3,7 +3,7 @@
   "name": "io.github.rmartins1451/losbeto",
   "title": "Losbeto — Market Data for AI Agents",
   "description": "Cross-asset market data and LLM inference for AI agents: forex, equities, commodities, crypto and macro — including a signed point-in-time Brazil macro archive (BCB/B3). Pay-per-call in USDC via x402.",
-  "version": "48.3.3",
+  "version": "48.3.4",
   "repository": {
     "source": "github",
     "url": "https://github.com/rmartins1451/losbeto"
