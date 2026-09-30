@@ -2,8 +2,8 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.rmartins1451/losbeto",
   "title": "Losbeto — Market Data for AI Agents",
-  "description": "Market data, Brazil point-in-time macro archive, central bank rates, LLM inference. USDC via x402.",
-  "version": "48.12.0",
+  "description": "Market data, on-node ML price forecasts, Brazil macro archive, LLM inference. USDC via x402.",
+  "version": "48.13.0",
   "repository": {
     "source": "github",
     "url": "https://github.com/rmartins1451/losbeto"
