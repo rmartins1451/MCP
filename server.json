@@ -3,7 +3,7 @@
   "name": "io.github.rmartins1451/losbeto",
   "title": "Losbeto — Market Data for AI Agents",
   "description": "Market data, ML forecasts, Brazil macro, LLM inference, agent intel. USDC via x402 + MPP/Tempo.",
-  "version": "48.16.3",
+  "version": "48.16.4",
   "repository": {
     "source": "github",
     "url": "https://github.com/rmartins1451/losbeto"
