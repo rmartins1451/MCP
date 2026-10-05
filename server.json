@@ -1,24 +1,27 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.rmartins1451/losbeto",
-  "title": "Losbeto — Market Data for AI Agents",
-  "description": "Market data, ML forecasts, Brazil macro, LLM inference, agent intel. USDC via x402 + MPP/Tempo.",
-  "version": "48.17.8",
+  "name": "io.github.rmartins1451/losbeto-mcp",
+  "title": "Losbeto",
+  "description": "Losbeto: 103 x402-paid endpoints — LLM gateway ($0.005/call, OpenAI-compatible), Brazil macro/B3 equities, US stocks, forex, commodities, crypto intelligence. Pay per call in USDC on Base, Solana or Algorand. No accounts, no API keys; free live sample on every endpoint.",
   "repository": {
-    "source": "github",
-    "url": "https://github.com/rmartins1451/losbeto"
+    "url": "https://github.com/rmartins1451/MCP",
+    "source": "github"
   },
-  "websiteUrl": "https://api.losbeto.xyz",
-  "icons": [
-    {
-      "src": "https://api.losbeto.xyz/favicon.png",
-      "mimeType": "image/png"
-    }
-  ],
+  "version": "1.1.1",
   "remotes": [
     {
       "type": "streamable-http",
       "url": "https://api.losbeto.xyz/mcp"
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "losbeto-mcp",
+      "version": "1.0.1",
+      "transport": {
+        "type": "stdio"
+      }
     }
   ]
 }
