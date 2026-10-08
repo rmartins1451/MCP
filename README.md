@@ -14,7 +14,7 @@ Registered ERC-8004 agent: [agentId 87048 on Base](https://8004scan.io/agents/ba
 }
 ```
 
-The remote server exposes **5 meta-tools** that cover the whole 115+ endpoint catalog:
+The remote server exposes **5 meta-tools** that cover the whole 116-endpoint catalog:
 
 - `search_market_data` — FREE. Describe what you need in plain language; get matching endpoints with price and parameters
 - `get_market_data` — fetch any endpoint (delayed sample FREE; live data at the endpoint's x402 price, from $0.001)
