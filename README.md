@@ -1,6 +1,6 @@
 # losbeto-mcp
 
-Losbeto x402 market intelligence as native tools in Claude Desktop, Claude Code, or Cursor. Base chain reads with ML on top, ERC-8004 agent reputation, Brazil central-bank macro, multi-oracle price consensus, launch risk, forex, commodities and crypto — plus an OpenAI-compatible LLM gateway. No signup. No API key. Paid tools settle automatically in USDC via x402 — **on Base, Solana or Algorand**.
+Losbeto x402 market intelligence as native tools in Claude Desktop, Claude Code, or Cursor. Base chain reads with ML on top, ERC-8004 agent reputation, Brazil central-bank macro, multi-oracle price consensus, launch risk, forex, commodities and crypto — plus an OpenAI-compatible LLM gateway. No signup. No API key. Paid tools settle automatically in USDC via x402 — **on Base, Solana, Algorand or Polygon**.
 
 Registered ERC-8004 agent: [agentId 87048 on Base](https://8004scan.io/agents/base/87048).
 
@@ -35,7 +35,7 @@ Without a key, free tools work and every paid tool returns a **real but delayed 
 }
 ```
 
-Get a credit key with **one on-chain payment — Base, Solana or Algorand, your choice**: `POST https://api.losbeto.xyz/buy-credits` (plans from $0.99 with bonus balance; machine-readable at `GET /plans`).
+Get a credit key with **one on-chain payment — Base, Solana, Algorand or Polygon, your choice**: `POST https://api.losbeto.xyz/buy-credits` (plans from $0.99 with bonus balance; machine-readable at `GET /plans`).
 
 Chain intelligence + agent-native endpoints (all reachable through the meta-tools above):
 
@@ -64,7 +64,7 @@ Chain intelligence + agent-native endpoints (all reachable through the meta-tool
 }
 ```
 
-`LOSBETO_PRIVATE_KEY` = an EVM private key holding a little USDC on Base (optional — free tools work without it). For Solana or Algorand payments, use the remote server with a credit key instead.
+`LOSBETO_PRIVATE_KEY` = an EVM private key holding a little USDC on Base (optional — free tools work without it). For Solana, Algorand or Polygon payments, use the remote server with a credit key instead.
 
 The npm package exposes the **classic 9-tool set**:
 
