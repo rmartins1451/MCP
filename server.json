@@ -1,13 +1,13 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.rmartins1451/losbeto",
-  "description": "Market data, LLM gateway (/models), ML forecasts, batch calls, self-healing ops. USDC x402 + MPP.",
+  "description": "Market data, LLM gateway, ML forecasts, batch+bundle calls, self-healing ops. USDC via x402 + MPP.",
   "title": "Losbeto — Market Data for AI Agents",
   "repository": {
     "url": "https://github.com/rmartins1451/losbeto",
     "source": "github"
   },
-  "version": "48.29.0",
+  "version": "48.30.0",
   "websiteUrl": "https://api.losbeto.xyz",
   "icons": [
     {
